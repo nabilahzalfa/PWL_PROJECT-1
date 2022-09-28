@@ -1,0 +1,60 @@
+describe('Testing Admin', () => {
+    it('User Can See The Page', () => {
+      cy.visit('http://127.0.0.1:8000/login')
+      cy.get('.login-box-msg').should('have.text','Masuk Untuk Melanjutkan')
+    })
+    Cypress.on('uncaught:exception', (err, runnable) => {
+        // returning false here prevents Cypress from
+        // failing the test
+        return false
+    })
+    it("User Write In Login Page", ()=>{
+        cy.visit('http://127.0.0.1:8000/login')
+        cy.get(':nth-child(2) > .form-control').type("diza@admin.com")
+        cy.get(':nth-child(3) > .form-control').type("admindiza")
+        cy.get('.btn').click()
+    })
+    it("User can read Supplier", ()=>{
+        cy.visit('http://127.0.0.1:8000/login')
+        cy.get(':nth-child(2) > .form-control').type("diza@admin.com")
+        cy.get(':nth-child(3) > .form-control').type("admindiza")
+        cy.get('.btn').click()
+        cy.get('.nav-pills > :nth-child(2) > [href="#"]').click()
+        cy.get('.menu-is-opening > .nav > :nth-child(3) > .nav-link').click()
+    })
+    it("User can add Supplier", ()=>{
+        cy.visit('http://127.0.0.1:8000/login')
+        cy.get(':nth-child(2) > .form-control').type("diza@admin.com")
+        cy.get(':nth-child(3) > .form-control').type("admindiza")
+        cy.get('.btn').click()
+        cy.get('.nav-pills > :nth-child(2) > [href="#"]').click()
+        cy.get('.menu-is-opening > .nav > :nth-child(3) > .nav-link').click()
+        cy.get('.float-right > .btn').click()
+        cy.get(':nth-child(2) > .form-control').type("Kepo Dek")
+        cy.get(':nth-child(3) > .form-control').type("Selamat belanja di toko kami Makasih")
+        cy.get(':nth-child(4) > .form-control').attachFile("logo kampus.png")
+        cy.get('.btn-primary').click()
+    })
+    it("User can edit Supplier", ()=>{
+        cy.visit('http://127.0.0.1:8000/login')
+        cy.get(':nth-child(2) > .form-control').type("diza@admin.com")
+        cy.get(':nth-child(3) > .form-control').type("admindiza")
+        cy.get('.btn').click()
+        cy.get('.nav-pills > :nth-child(2) > [href="#"]').click()
+        cy.get('.menu-is-opening > .nav > :nth-child(3) > .nav-link').click()
+        cy.get(':nth-child(1) > [width="250px"] > form > .btn-primary').click()
+        cy.get(':nth-child(3) > .form-control').type("gap classic")
+        cy.get(':nth-child(4) > .form-control').type("gap adalah brand baju ternama")
+        cy.get(':nth-child(5) > .form-control').attachFile("logo kampus.png")
+        cy.get('.btn-primary').click()
+    })
+    it("User can delete Supplier", ()=>{
+        cy.visit('http://127.0.0.1:8000/login')
+        cy.get(':nth-child(2) > .form-control').type("diza@admin.com")
+        cy.get(':nth-child(3) > .form-control').type("admindiza")
+        cy.get('.btn').click()
+        cy.get('.nav-pills > :nth-child(2) > [href="#"]').click()
+        cy.get('.menu-is-opening > .nav > :nth-child(3) > .nav-link').click()
+        cy.get(':nth-child(1) > [width="250px"] > form > .btn-danger').click()
+    })
+  })
